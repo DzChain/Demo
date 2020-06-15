@@ -32,6 +32,7 @@ def get_images(html):
     return urls
 
 def downloadimg(urls,name):
+    Old_PathD= os.getcwd()
     pathD = 'pic'
     if pathD in os.listdir():
         pass
@@ -46,6 +47,7 @@ def downloadimg(urls,name):
             f.write(imag)
         i+=1
     print('图片下载成功')
+    os.chdir(Old_PathD)
 
 
 if __name__ == '__main__':
