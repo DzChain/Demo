@@ -1,0 +1,38 @@
+# -*- coding: utf-8 -*-
+"""
+-----------------------------
+    File Name: MyHtmlParser
+    Description:
+    Author: quan
+    data: 2020/06/16
+-----------------------------
+"""
+from html.parser import HTMLParser
+
+class MyParser(HTMLParser):
+    re = []  # 放置结果
+    flg = 0  # 标志，用以标记是否找到我们需要的标签
+
+    def handle_starttag(self, tag, attrs):
+        if tag == 'p':  # 目标标签
+            for attr in attrs:
+                print(attr)
+                if attr[0] == 'class':  # 目标标签具有的属性
+                    self.flg = 1  # 符合条件则将标志设置为1
+                    break
+        else:
+            pass
+
+    def handle_endtag(self, tag):
+        print('endtag is %s' %tag)
+
+    def handle_data(self, data):
+        if self.flg == 1:
+            self.re.append(data.strip())  # 如果标志为我们需要的标志，则将数据添加到列表中
+            self.flg = 0  # 重置标志，进行下次迭代
+        else:
+            pass
+
+
+if __name__ == '__main__':
+    pass
